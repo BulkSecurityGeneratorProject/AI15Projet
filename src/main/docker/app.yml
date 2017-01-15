@@ -1,0 +1,22 @@
+version: '2'
+services:
+    ai15-app:
+        image: ai15
+        external_links:
+            - ai15-mysql:mysql
+            - ai15-elasticsearch:elasticsearch
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/ai15?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
+        ports:
+            - 8080:8080
+    ai15-mysql:
+        extends:
+            file: mysql.yml
+            service: ai15-mysql
+    ai15-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: ai15-elasticsearch

@@ -1,0 +1,22 @@
+{
+    "ai15App": {
+        "stats" : {
+            "home": {
+                "title": "Stats",
+                "createLabel": "Créer un nouveau Stats",
+                "createOrEditLabel": "Créer ou éditer un Stats",
+                "search": "Recherche pour Stats"
+            },
+            "created": "Un nouveau Stats a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Stats avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Stats avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Stats {{ id }} ?"
+            },
+            "detail": {
+                "title": "Stats"
+            },
+            "titre": "Titre"
+        }
+    }
+}
