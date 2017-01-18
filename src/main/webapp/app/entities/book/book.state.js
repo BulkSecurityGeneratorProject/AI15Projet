@@ -106,6 +106,9 @@
                             return {
                                 titre: null,
                                 auteur: null,
+                                annee: null,
+                                prix: null,
+                                nbPage: null,
                                 id: null
                             };
                         }

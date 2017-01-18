@@ -11,16 +11,71 @@
                 <div class="alert alert-success" ng-switch-when="true" data-translate="home.logged.message" translate-values="{username: '{{vm.account.login}}'}">
                     You are logged in as user "{{vm.account.login}}".
                 </div>
-
+				
+				<!--
                 <div class="alert alert-warning" ng-switch-when="false" data-translate="global.messages.info.authenticated" translate-compile>
                     If you want to <a class="alert-link" href="" ng-click="vm.login()">sign in</a>, you can try the default accounts:<br/>- Administrator (login="admin" and password="admin") <br/>- User (login="user" and password="user").
                 </div>
-
+				-->
+				
                 <div class="alert alert-warning" ng-switch-when="false" data-translate="global.messages.info.register" translate-compile>
                     You don't have an account yet? <a class="alert-link" ui-sref="register">Register a new account</a>
                 </div>
             </div>
-
+		<div class="container-fluid">
+			<div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Rechercher un document">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+          </div>  
+          
+          <br>
+            
+            <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span data-translate="global.field.id">ID</span></th>
+                    <th><span data-translate="Titre">Titre</span></th>
+                    <th><span data-translate="Auteur">Auteur</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>  
+                	<tr ng-repeat="book in vm.books track by book.id">
+                    <td><a ui-sref="book-detail({id:book.id})">{{book.id}}</a></td>
+                    <td>{{book.titre}}</td>
+                    <td>{{book.auteur}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="book-detail({id:book.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+            
+                        
+            <!--
             <p data-translate="home.question">
                 If you have any question on JHipster:
             </p>
@@ -32,10 +87,11 @@
                 <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" data-translate="home.link.chat">JHipster public chat room</a></li>
                 <li><a href="https://twitter.com/java_hipster" target="_blank"  data-translate="home.link.follow">follow @java_hipster on Twitter</a></li>
             </ul>
-
+			
             <p>
              <span data-translate="home.like">If you like JHipster, don't forget to give us a star on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank" data-translate="home.github">Github</a>!
             </p>
+            -->
         </div>
     </div>
 </div>

@@ -12,5 +12,6 @@
             abstract: true,
             parent: 'app'
         });
-    }
+    }    
+    
 })();
