@@ -32,13 +32,13 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active" has-authority="ROLE_ADMIN">
+                        <li ui-sref-active="active">
                             <a ui-sref="book" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                 <span data-translate="global.menu.entities.book">Book</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active">
+                        <li ui-sref-active="active"has-authority="ROLE_ADMIN">
                             <a ui-sref="stats" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                 <span data-translate="global.menu.entities.stats">Stats</span>

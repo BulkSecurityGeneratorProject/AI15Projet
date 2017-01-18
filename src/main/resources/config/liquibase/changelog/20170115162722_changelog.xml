@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+   <changeSet author="robin (generated)" id="1484497653149-1">
+      <dropForeignKeyConstraint baseTableName="jhi_user_authority" constraintName="fk_authority_name"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-2">
+      <dropForeignKeyConstraint baseTableName="jhi_persistent_audit_evt_data"
+                                constraintName="fk_evt_pers_audit_evt_data"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-3">
+      <dropForeignKeyConstraint baseTableName="jhi_user_authority" constraintName="fk_user_id"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-4">
+      <dropForeignKeyConstraint baseTableName="jhi_persistent_token"
+                                constraintName="fk_user_persistent_token"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-5">
+      <dropUniqueConstraint constraintName="email" tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-6">
+      <dropUniqueConstraint constraintName="idx_user_email" tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-7">
+      <dropUniqueConstraint constraintName="idx_user_login" tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-8">
+      <dropUniqueConstraint constraintName="login" tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-9">
+      <dropTable tableName="book"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-10">
+      <dropTable tableName="jhi_authority"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-11">
+      <dropTable tableName="jhi_persistent_audit_event"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-12">
+      <dropTable tableName="jhi_persistent_audit_evt_data"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-13">
+      <dropTable tableName="jhi_persistent_token"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-14">
+      <dropTable tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-15">
+      <dropTable tableName="jhi_user_authority"/>
+   </changeSet>
+   <changeSet author="robin (generated)" id="1484497653149-16">
+      <dropTable tableName="stats"/>
+   </changeSet>
+</databaseChangeLog>
