@@ -53,7 +53,7 @@
                     <td>{{book.annee}}</td>
                     <td>{{book.prix}}</td>
                     <td>{{book.nbPage}}</td>
-                    <td data-translate="{{'ai15App.Booktype.' + book.type}}">{{book.type}}</td>
+                    <td >{{book.type}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -74,7 +74,13 @@
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
                             </button>
-                        </div>
+                		<button class="btn btn-primary" ui-sref="book.achat()" >
+			              <span class="glyphicon glyphicon-plus"></span>
+			              <span class="hidden-xs"  >
+			                        Achat
+			             </span>
+			            </button>
+			            </div>
                     </td>
                 </tr>
             </tbody>

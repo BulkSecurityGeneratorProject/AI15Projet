@@ -26,7 +26,6 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('book');
-                    $translatePartialLoader.addPart('booktype');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
@@ -49,7 +48,6 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('book');
-                    $translatePartialLoader.addPart('booktype');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Book', function($stateParams, Book) {
@@ -69,7 +67,7 @@
             parent: 'book-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_PUBLISHER']
+                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -94,7 +92,7 @@
             parent: 'book',
             url: '/new',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_PUBLISHER']
+                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -111,7 +109,6 @@
                                 annee: null,
                                 prix: null,
                                 nbPage: null,
-                                type: null,
                                 id: null
                             };
                         }
@@ -127,7 +124,7 @@
             parent: 'book',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_ADMIN','ROLE_PUBLISHER']
+                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -152,7 +149,7 @@
             parent: 'book',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_ADMIN']
+                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
@@ -169,6 +166,33 @@
                     $state.go('book', null, { reload: 'book' });
                 }, function() {
                     $state.go('^');
+                });
+            }]
+        })
+          .state('book.achat', {
+            parent: 'book',
+            url: '/achat',
+            data: {
+                authorities: ['ROLE_USER']
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'app/entities/book/book-achat.html',
+                    controller: 'BibliothequeDialogController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'lg',
+                    resolve: {
+                        entity: function () {
+                            return {
+                                id: null
+                            };
+                        }
+                    }
+                }).result.then(function() {
+                    $state.go('bibliotheque', null, { reload: 'book' });
+                }, function() {
+                    $state.go('book');
                 });
             }]
         });

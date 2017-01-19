@@ -39,6 +39,9 @@
         
         $scope.searchUser = function(param) {
             return function(bibliotheque) {
+            	if(param == 'admin'){
+            		return true;
+            	}
             	if(bibliotheque.user.login == param){
             		return true;
             	}
