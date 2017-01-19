@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "book",
+            "otherEntityName": "book",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "titre"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20170119003527",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "bibliotheque",
+    "pagination": "pager"
+}

@@ -29,6 +29,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.ai15.projet.domain.enumeration.Booktype;
 /**
  * Test class for the BookResource REST controller.
  *
@@ -43,6 +44,18 @@ public class BookResourceIntTest {
 
     private static final String DEFAULT_AUTEUR = "AAAAAAAAAA";
     private static final String UPDATED_AUTEUR = "BBBBBBBBBB";
+
+    private static final Integer DEFAULT_ANNEE = 1;
+    private static final Integer UPDATED_ANNEE = 2;
+
+    private static final Float DEFAULT_PRIX = 1F;
+    private static final Float UPDATED_PRIX = 2F;
+
+    private static final Integer DEFAULT_NB_PAGE = 1;
+    private static final Integer UPDATED_NB_PAGE = 2;
+
+    private static final Booktype DEFAULT_TYPE = Booktype.ARTICLE;
+    private static final Booktype UPDATED_TYPE = Booktype.ESSAI;
 
     @Inject
     private BookRepository bookRepository;
@@ -83,7 +96,11 @@ public class BookResourceIntTest {
     public static Book createEntity(EntityManager em) {
         Book book = new Book()
                 .titre(DEFAULT_TITRE)
-                .auteur(DEFAULT_AUTEUR);
+                .auteur(DEFAULT_AUTEUR)
+                .annee(DEFAULT_ANNEE)
+                .prix(DEFAULT_PRIX)
+                .nbPage(DEFAULT_NB_PAGE)
+                .type(DEFAULT_TYPE);
         return book;
     }
 
@@ -111,6 +128,10 @@ public class BookResourceIntTest {
         Book testBook = bookList.get(bookList.size() - 1);
         assertThat(testBook.getTitre()).isEqualTo(DEFAULT_TITRE);
         assertThat(testBook.getAuteur()).isEqualTo(DEFAULT_AUTEUR);
+        assertThat(testBook.getAnnee()).isEqualTo(DEFAULT_ANNEE);
+        assertThat(testBook.getPrix()).isEqualTo(DEFAULT_PRIX);
+        assertThat(testBook.getNbPage()).isEqualTo(DEFAULT_NB_PAGE);
+        assertThat(testBook.getType()).isEqualTo(DEFAULT_TYPE);
 
         // Validate the Book in ElasticSearch
         Book bookEs = bookSearchRepository.findOne(testBook.getId());
@@ -139,6 +160,96 @@ public class BookResourceIntTest {
 
     @Test
     @Transactional
+    public void checkTitreIsRequired() throws Exception {
+        int databaseSizeBeforeTest = bookRepository.findAll().size();
+        // set the field null
+        book.setTitre(null);
+
+        // Create the Book, which fails.
+
+        restBookMockMvc.perform(post("/api/books")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(book)))
+            .andExpect(status().isBadRequest());
+
+        List<Book> bookList = bookRepository.findAll();
+        assertThat(bookList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkAuteurIsRequired() throws Exception {
+        int databaseSizeBeforeTest = bookRepository.findAll().size();
+        // set the field null
+        book.setAuteur(null);
+
+        // Create the Book, which fails.
+
+        restBookMockMvc.perform(post("/api/books")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(book)))
+            .andExpect(status().isBadRequest());
+
+        List<Book> bookList = bookRepository.findAll();
+        assertThat(bookList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkAnneeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = bookRepository.findAll().size();
+        // set the field null
+        book.setAnnee(null);
+
+        // Create the Book, which fails.
+
+        restBookMockMvc.perform(post("/api/books")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(book)))
+            .andExpect(status().isBadRequest());
+
+        List<Book> bookList = bookRepository.findAll();
+        assertThat(bookList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkPrixIsRequired() throws Exception {
+        int databaseSizeBeforeTest = bookRepository.findAll().size();
+        // set the field null
+        book.setPrix(null);
+
+        // Create the Book, which fails.
+
+        restBookMockMvc.perform(post("/api/books")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(book)))
+            .andExpect(status().isBadRequest());
+
+        List<Book> bookList = bookRepository.findAll();
+        assertThat(bookList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkTypeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = bookRepository.findAll().size();
+        // set the field null
+        book.setType(null);
+
+        // Create the Book, which fails.
+
+        restBookMockMvc.perform(post("/api/books")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(book)))
+            .andExpect(status().isBadRequest());
+
+        List<Book> bookList = bookRepository.findAll();
+        assertThat(bookList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllBooks() throws Exception {
         // Initialize the database
         bookRepository.saveAndFlush(book);
@@ -149,7 +260,11 @@ public class BookResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(book.getId().intValue())))
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE.toString())))
-            .andExpect(jsonPath("$.[*].auteur").value(hasItem(DEFAULT_AUTEUR.toString())));
+            .andExpect(jsonPath("$.[*].auteur").value(hasItem(DEFAULT_AUTEUR.toString())))
+            .andExpect(jsonPath("$.[*].annee").value(hasItem(DEFAULT_ANNEE)))
+            .andExpect(jsonPath("$.[*].prix").value(hasItem(DEFAULT_PRIX.doubleValue())))
+            .andExpect(jsonPath("$.[*].nbPage").value(hasItem(DEFAULT_NB_PAGE)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 
     @Test
@@ -164,7 +279,11 @@ public class BookResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(book.getId().intValue()))
             .andExpect(jsonPath("$.titre").value(DEFAULT_TITRE.toString()))
-            .andExpect(jsonPath("$.auteur").value(DEFAULT_AUTEUR.toString()));
+            .andExpect(jsonPath("$.auteur").value(DEFAULT_AUTEUR.toString()))
+            .andExpect(jsonPath("$.annee").value(DEFAULT_ANNEE))
+            .andExpect(jsonPath("$.prix").value(DEFAULT_PRIX.doubleValue()))
+            .andExpect(jsonPath("$.nbPage").value(DEFAULT_NB_PAGE))
+            .andExpect(jsonPath("$.type").value(DEFAULT_TYPE.toString()));
     }
 
     @Test
@@ -187,7 +306,11 @@ public class BookResourceIntTest {
         Book updatedBook = bookRepository.findOne(book.getId());
         updatedBook
                 .titre(UPDATED_TITRE)
-                .auteur(UPDATED_AUTEUR);
+                .auteur(UPDATED_AUTEUR)
+                .annee(UPDATED_ANNEE)
+                .prix(UPDATED_PRIX)
+                .nbPage(UPDATED_NB_PAGE)
+                .type(UPDATED_TYPE);
 
         restBookMockMvc.perform(put("/api/books")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -200,6 +323,10 @@ public class BookResourceIntTest {
         Book testBook = bookList.get(bookList.size() - 1);
         assertThat(testBook.getTitre()).isEqualTo(UPDATED_TITRE);
         assertThat(testBook.getAuteur()).isEqualTo(UPDATED_AUTEUR);
+        assertThat(testBook.getAnnee()).isEqualTo(UPDATED_ANNEE);
+        assertThat(testBook.getPrix()).isEqualTo(UPDATED_PRIX);
+        assertThat(testBook.getNbPage()).isEqualTo(UPDATED_NB_PAGE);
+        assertThat(testBook.getType()).isEqualTo(UPDATED_TYPE);
 
         // Validate the Book in ElasticSearch
         Book bookEs = bookSearchRepository.findOne(testBook.getId());
@@ -259,6 +386,10 @@ public class BookResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(book.getId().intValue())))
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE.toString())))
-            .andExpect(jsonPath("$.[*].auteur").value(hasItem(DEFAULT_AUTEUR.toString())));
+            .andExpect(jsonPath("$.[*].auteur").value(hasItem(DEFAULT_AUTEUR.toString())))
+            .andExpect(jsonPath("$.[*].annee").value(hasItem(DEFAULT_ANNEE)))
+            .andExpect(jsonPath("$.[*].prix").value(hasItem(DEFAULT_PRIX.doubleValue())))
+            .andExpect(jsonPath("$.[*].nbPage").value(hasItem(DEFAULT_NB_PAGE)))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())));
     }
 }

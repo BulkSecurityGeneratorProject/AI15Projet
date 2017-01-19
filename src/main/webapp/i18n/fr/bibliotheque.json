@@ -1,0 +1,23 @@
+{
+    "ai15App": {
+        "bibliotheque" : {
+            "home": {
+                "title": "Bibliotheques",
+                "createLabel": "Créer un nouveau Bibliotheque",
+                "createOrEditLabel": "Créer ou éditer un Bibliotheque",
+                "search": "Recherche pour Bibliotheque"
+            },
+            "created": "Un nouveau Bibliotheque a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Bibliotheque avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Bibliotheque avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Bibliotheque {{ id }} ?"
+            },
+            "detail": {
+                "title": "Bibliotheque"
+            },
+            "user": "User",
+            "book": "Book"
+        }
+    }
+}

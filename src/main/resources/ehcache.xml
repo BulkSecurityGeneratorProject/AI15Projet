@@ -24,5 +24,7 @@
 
     <cache alias="com.ai15.projet.domain.Stats" uses-template="simple"/>
 
+    <cache alias="com.ai15.projet.domain.Bibliotheque" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

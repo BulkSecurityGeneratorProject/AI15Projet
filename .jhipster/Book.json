@@ -4,11 +4,43 @@
     "fields": [
         {
             "fieldName": "titre",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         },
         {
             "fieldName": "auteur",
-            "fieldType": "String"
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "annee",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "prix",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "nbPage",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "Booktype",
+            "fieldValues": "ARTICLE,ESSAI,LIVRE,DECISIONJUGE,BD",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20170114234738",

@@ -17,7 +17,11 @@
                 "title": "Book"
             },
             "titre": "Titre",
-            "auteur": "Auteur"
+            "auteur": "Auteur",
+            "annee": "Annee",
+            "prix": "Prix",
+            "nbPage": "Nb Page",
+            "type": "Type"
         }
     }
 }

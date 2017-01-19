@@ -1,20 +1,20 @@
 <div>
-    <h2 data-translate="ai15App.book.home.title">Books</h2>
+    <h2 data-translate="ai15App.bibliotheque.home.title">Bibliotheques</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="book.new" >
+                <button class="btn btn-primary" ui-sref="bibliotheque.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs"  data-translate="ai15App.book.home.createLabel">
-                        Create new Book
+                    <span class="hidden-xs"  data-translate="ai15App.bibliotheque.home.createLabel">
+                        Create new Bibliotheque
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'ai15App.book.home.search' | translate }}">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'ai15App.bibliotheque.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -34,42 +34,38 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr>
-                    <th><span data-translate="global.field.id">ID</span></th>
-                    <th><span data-translate="ai15App.book.titre">Titre</span></th>
-                    <th><span data-translate="ai15App.book.auteur">Auteur</span></th>
-                    <th><span data-translate="ai15App.book.annee">Annee</span></th>
-                    <th><span data-translate="ai15App.book.prix">Prix</span></th>
-                    <th><span data-translate="ai15App.book.nbPage">Nb Page</span></th>
-                    <th><span data-translate="ai15App.book.type">Type</span></th>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span data-translate="ai15App.bibliotheque.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="book.titre"><span data-translate="ai15App.bibliotheque.book">Book</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="book in vm.books track by book.id">
-                    <td><a ui-sref="book-detail({id:book.id})">{{book.id}}</a></td>
-                    <td>{{book.titre}}</td>
-                    <td>{{book.auteur}}</td>
-                    <td>{{book.annee}}</td>
-                    <td>{{book.prix}}</td>
-                    <td>{{book.nbPage}}</td>
-                    <td data-translate="{{'ai15App.Booktype.' + book.type}}">{{book.type}}</td>
+                <tr ng-repeat="bibliotheque in vm.bibliotheques track by bibliotheque.id">
+                    <td><a ui-sref="bibliotheque-detail({id:bibliotheque.id})">{{bibliotheque.id}}</a></td>
+                    <td>
+                        {{bibliotheque.user.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="book-detail({id:bibliotheque.book.id})">{{bibliotheque.book.titre}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="book-detail({id:book.id})"
+                                    ui-sref="bibliotheque-detail({id:bibliotheque.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="book.edit({id:book.id})"
+                                    ui-sref="bibliotheque.edit({id:bibliotheque.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="book.delete({id:book.id})"
+                                    ui-sref="bibliotheque.delete({id:bibliotheque.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
@@ -80,4 +76,8 @@
             </tbody>
         </table>
     </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+    </div>
+    <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
 </div>

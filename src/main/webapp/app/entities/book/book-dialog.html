@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -17,13 +17,79 @@
             <label class="control-label" data-translate="ai15App.book.titre" for="field_titre">Titre</label>
             <input type="text" class="form-control" name="titre" id="field_titre"
                     ng-model="vm.book.titre"
-                     />
+                    required />
+            <div ng-show="editForm.titre.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.titre.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="ai15App.book.auteur" for="field_auteur">Auteur</label>
             <input type="text" class="form-control" name="auteur" id="field_auteur"
                     ng-model="vm.book.auteur"
+                    required />
+            <div ng-show="editForm.auteur.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.auteur.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="ai15App.book.annee" for="field_annee">Annee</label>
+            <input type="number" class="form-control" name="annee" id="field_annee"
+                    ng-model="vm.book.annee"
+                    required />
+            <div ng-show="editForm.annee.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.annee.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.annee.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="ai15App.book.prix" for="field_prix">Prix</label>
+            <input type="number" class="form-control" name="prix" id="field_prix"
+                    ng-model="vm.book.prix"
+                    required />
+            <div ng-show="editForm.prix.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.prix.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.prix.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="ai15App.book.nbPage" for="field_nbPage">Nb Page</label>
+            <input type="number" class="form-control" name="nbPage" id="field_nbPage"
+                    ng-model="vm.book.nbPage"
                      />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="ai15App.book.type" for="field_type">Type</label>
+            <select class="form-control" name="type" ng-model="vm.book.type" id="field_type" required>
+                <option value="ARTICLE" data-translate="ai15App.Booktype.ARTICLE">ARTICLE</option>
+                <option value="ESSAI" data-translate="ai15App.Booktype.ESSAI">ESSAI</option>
+                <option value="LIVRE" data-translate="ai15App.Booktype.LIVRE">LIVRE</option>
+                <option value="DECISIONJUGE" data-translate="ai15App.Booktype.DECISIONJUGE">DECISIONJUGE</option>
+                <option value="BD" data-translate="ai15App.Booktype.BD">BD</option>
+            </select>
+            <div ng-show="editForm.type.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.type.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
         </div>
 
     </div>

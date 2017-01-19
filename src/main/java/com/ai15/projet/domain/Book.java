@@ -5,8 +5,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import com.ai15.projet.domain.enumeration.Booktype;
 
 /**
  * A Book.
@@ -23,11 +26,29 @@ public class Book implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "titre")
+    @NotNull
+    @Column(name = "titre", nullable = false)
     private String titre;
 
-    @Column(name = "auteur")
+    @NotNull
+    @Column(name = "auteur", nullable = false)
     private String auteur;
+
+    @NotNull
+    @Column(name = "annee", nullable = false)
+    private Integer annee;
+
+    @NotNull
+    @Column(name = "prix", nullable = false)
+    private Float prix;
+
+    @Column(name = "nb_page")
+    private Integer nbPage;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private Booktype type;
 
     public Long getId() {
         return id;
@@ -63,6 +84,58 @@ public class Book implements Serializable {
         this.auteur = auteur;
     }
 
+    public Integer getAnnee() {
+        return annee;
+    }
+
+    public Book annee(Integer annee) {
+        this.annee = annee;
+        return this;
+    }
+
+    public void setAnnee(Integer annee) {
+        this.annee = annee;
+    }
+
+    public Float getPrix() {
+        return prix;
+    }
+
+    public Book prix(Float prix) {
+        this.prix = prix;
+        return this;
+    }
+
+    public void setPrix(Float prix) {
+        this.prix = prix;
+    }
+
+    public Integer getNbPage() {
+        return nbPage;
+    }
+
+    public Book nbPage(Integer nbPage) {
+        this.nbPage = nbPage;
+        return this;
+    }
+
+    public void setNbPage(Integer nbPage) {
+        this.nbPage = nbPage;
+    }
+
+    public Booktype getType() {
+        return type;
+    }
+
+    public Book type(Booktype type) {
+        this.type = type;
+        return this;
+    }
+
+    public void setType(Booktype type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -89,6 +162,10 @@ public class Book implements Serializable {
             "id=" + id +
             ", titre='" + titre + "'" +
             ", auteur='" + auteur + "'" +
+            ", annee='" + annee + "'" +
+            ", prix='" + prix + "'" +
+            ", nbPage='" + nbPage + "'" +
+            ", type='" + type + "'" +
             '}';
     }
 }

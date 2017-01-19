@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -48,7 +49,7 @@ public class BookResource {
      */
     @PostMapping("/books")
     @Timed
-    public ResponseEntity<Book> createBook(@RequestBody Book book) throws URISyntaxException {
+    public ResponseEntity<Book> createBook(@Valid @RequestBody Book book) throws URISyntaxException {
         log.debug("REST request to save Book : {}", book);
         if (book.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("book", "idexists", "A new book cannot already have an ID")).body(null);
@@ -71,7 +72,7 @@ public class BookResource {
      */
     @PutMapping("/books")
     @Timed
-    public ResponseEntity<Book> updateBook(@RequestBody Book book) throws URISyntaxException {
+    public ResponseEntity<Book> updateBook(@Valid @RequestBody Book book) throws URISyntaxException {
         log.debug("REST request to update Book : {}", book);
         if (book.getId() == null) {
             return createBook(book);

@@ -9,6 +9,7 @@
                 "main": "Entités",
                 "book": "Book",
                 "stats": "Stats",
+                "bibliotheque": "Bibliotheque",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

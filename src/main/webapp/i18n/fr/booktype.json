@@ -1,0 +1,12 @@
+{
+    "ai15App": {
+        "Booktype" : {
+            "null": "",
+            "ARTICLE": "ARTICLE",
+            "ESSAI": "ESSAI",
+            "LIVRE": "LIVRE",
+            "DECISIONJUGE": "DECISIONJUGE",
+            "BD": "BD"
+        }
+    }
+}
