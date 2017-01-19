@@ -5,9 +5,9 @@
         .module('ai15App')
         .controller('BibliothequeController', BibliothequeController);
 
-    BibliothequeController.$inject = ['$scope', '$state', 'Bibliotheque', 'BibliothequeSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    BibliothequeController.$inject = ['$scope', '$state', 'Bibliotheque', 'BibliothequeSearch', 'ParseLinks', 'Principal', 'LoginService','AlertService', 'paginationConstants', 'pagingParams'];
 
-    function BibliothequeController ($scope, $state, Bibliotheque, BibliothequeSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function BibliothequeController ($scope, $state, Bibliotheque, BibliothequeSearch, ParseLinks, Principal,  LoginService, AlertService, paginationConstants, pagingParams) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -20,6 +20,31 @@
         vm.loadAll = loadAll;
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
+        
+        vm.account = null;
+        vm.isAuthenticated = null;
+        vm.login = LoginService.open;
+        $scope.$on('authenticationSuccess', function() {
+            getAccount();
+        });
+
+        getAccount();
+        
+        function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+                vm.isAuthenticated = Principal.isAuthenticated;
+            });
+        }
+        
+        $scope.searchUser = function(param) {
+            return function(bibliotheque) {
+            	if(bibliotheque.user.login == param){
+            		return true;
+            	}
+            	return false;
+            }
+        }
 
         loadAll();
 

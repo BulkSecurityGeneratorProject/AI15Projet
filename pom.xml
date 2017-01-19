@@ -594,7 +594,7 @@
                     <url>jdbc:mysql://localhost:3306/AI15</url>
                     <defaultSchemaName>AI15</defaultSchemaName>
                     <username>root</username>
-                    <password>root</password>
+                    <password>211195rb</password>
                     <referenceUrl>hibernate:spring:com.ai15.projet.domain?dialect=org.hibernate.dialect.MySQL5InnoDBDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                     <verbose>true</verbose>
                     <logging>debug</logging>

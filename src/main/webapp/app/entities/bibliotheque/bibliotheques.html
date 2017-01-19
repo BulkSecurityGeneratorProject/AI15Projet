@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="bibliotheque in vm.bibliotheques track by bibliotheque.id">
+                <tr ng-repeat="bibliotheque in vm.bibliotheques | filter: searchUser(vm.account.login)">
                     <td><a ui-sref="bibliotheque-detail({id:bibliotheque.id})">{{bibliotheque.id}}</a></td>
                     <td>
                         {{bibliotheque.user.login}}
@@ -81,3 +81,5 @@
     </div>
     <uib-pager total-items="vm.totalItems" ng-model="vm.page" ng-change="vm.transition()"></uib-pager>
 </div>
+
+				

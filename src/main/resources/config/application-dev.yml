@@ -27,7 +27,7 @@ spring:
         url: jdbc:mysql://localhost:3306/ai15?useUnicode=true&characterEncoding=utf8&useSSL=false
         name:
         username: root
-        password: root
+        password: 211195rb
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -51,8 +51,10 @@ spring:
     data:
         elasticsearch:
             cluster-name:
-            cluster-nodes:
+            cluster-nodes: 
             properties:
+                http:
+                  enabled: true
                 path:
                   logs: target/elasticsearch/log
                   data: target/elasticsearch/data
